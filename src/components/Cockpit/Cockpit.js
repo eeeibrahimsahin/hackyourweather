@@ -29,7 +29,7 @@ export default function Cockpit() {
 function useAsyncHook(searchCity) {
     const [result, setResult] = useState([]);
     const [loading, setLoading] = useState(false);
-    const API_KEY = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
+    const API_KEY = "660046a2d0f1aad1612b4fc7aff0b4c0";
 
     useEffect(() => {
         async function fetchCityInfo() {
