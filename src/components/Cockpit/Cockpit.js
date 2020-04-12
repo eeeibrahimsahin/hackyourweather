@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Input from "../Input/Input";
 import City from "../City/City";
-const API_KEY = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
 
 export default function Cockpit() {
     const [search, setSearch] = useState("");
@@ -30,6 +29,8 @@ export default function Cockpit() {
 function useAsyncHook(searchCity) {
     const [result, setResult] = useState([]);
     const [loading, setLoading] = useState(false);
+    const API_KEY = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
+
     useEffect(() => {
         async function fetchCityInfo() {
             try {
