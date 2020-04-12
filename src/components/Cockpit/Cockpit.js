@@ -18,8 +18,10 @@ export default function Cockpit() {
             />
             {loading === false ? (
                 <h1>Enter a name of city, please!</h1>
-            ) : loading === "null" ? (
+            ) : loading === null ? (
                 <h1>No City Found</h1>
+            ) : result.length < 1 ? (
+                <h1>Loading....</h1>
             ) : (
                 <City data={result} />
             )}
@@ -35,6 +37,7 @@ function useAsyncHook(searchCity) {
         async function fetchCityInfo() {
             try {
                 setLoading(true);
+                setResult([]);
                 const response = await fetch(
                     `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${API_KEY}`
                 );
