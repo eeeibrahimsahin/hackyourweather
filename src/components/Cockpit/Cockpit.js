@@ -36,7 +36,7 @@ function useAsyncHook(searchCity) {
             try {
                 setLoading(true);
                 const response = await fetch(
-                    `http://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${API_KEY}`
+                    `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${API_KEY}`
                 );
                 const json = await response.json();
                 setResult({
