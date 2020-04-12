@@ -1,0 +1,32 @@
+.Input {
+    margin: 1rem auto 2rem;
+}
+
+.Input input {
+    padding: 1rem;
+    padding-left: 5rem;
+    width: 20rem;
+    border: 1px solid #f5f5f5;
+    border-radius: 0.75rem;
+    font-size: 1.25rem;
+    color: gray;
+    background-image: url("../../assets/searchIcon.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 1.5rem;
+    outline: 0;
+}
+.Input button {
+    margin-left: 1rem;
+    background-color: f5f5f5;
+    color: black;
+    border: 2px solid black;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    padding: 0.75rem 2rem;
+    cursor: pointer;
+}
+
+.Input button:hover {
+    background-color: #ffffff;
+}

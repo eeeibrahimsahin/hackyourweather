@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+}
+.City {
+    width: 30%;
+    margin: 16px auto;
+    padding-left: 16px;
+    border: 2px solid black;
+    text-align: left;
+}
+.Weather {
+    margin: 20px auto;
+}
+p {
+    margin: 10px auto;
+}
