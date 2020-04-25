@@ -8,6 +8,12 @@
     border: 2px solid black;
     text-align: left;
 }
+.Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 20px;
+}
 .Weather {
     margin: 20px auto;
 }

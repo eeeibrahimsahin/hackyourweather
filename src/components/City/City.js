@@ -1,19 +1,27 @@
 import React from "react";
 import "./City.css";
-export default function Cities(props) {
-    let data = props.data;
+export default function Cities({
+    name,
+    weather: [{ main: weatherMain, description: weatherDescription }],
+    main: { temp_min: minTemp, temp_max: maxTemp },
+    coord: { lon: longitude, lat: latitude },
+    deleteCity,
+}) {
     return (
         <div className="City">
-            <h1>{data.name}</h1>
+            <div className="Header">
+                <h1>{name}</h1>{" "}
+                <i onClick={deleteCity} className="far fa-trash-alt"></i>
+            </div>
             <div className="Weather">
-                <h2>{data.weatherMain}</h2>
-                <h5>{data.weatherDescription}</h5>
+                <h2>{weatherMain}</h2>
+                <h5>{weatherDescription}</h5>
             </div>
             <div>
-                <p>min temp: {data.minTemp}</p>
-                <p>max temp: {data.maxTemp}</p>
+                <p>min temp: {minTemp}</p>
+                <p>max temp: {maxTemp}</p>
                 <p>
-                    location: {data.longitude},{data.latitude}
+                    location: {longitude},{latitude}
                 </p>
             </div>
         </div>

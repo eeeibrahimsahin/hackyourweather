@@ -1,11 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Input from "../Input/Input";
 import City from "../City/City";
+import useSearchHook from "../../utils/useSearchHook";
 
 export default function Cockpit() {
     const [search, setSearch] = useState("");
     const [query, setQuery] = useState("");
-    const [result, loading] = useAsyncHook(query);
+    const [result, setResult, loading, setLoading] = useSearchHook(query);
+    const deleteHandler = (id) => {
+        let newList = result.filter((city) => city.id !== id);
+        setResult(newList);
+        if (newList.length === 0) {
+            setLoading(false);
+            window.location.reload();
+        }
+    };
+
+    const cityList = result.map((city) => {
+        return (
+            <City
+                key={city.id}
+                {...city}
+                deleteCity={() => deleteHandler(city.id)}
+            />
+        );
+    });
     return (
         <div>
             <h1>Weather</h1>
@@ -13,8 +32,11 @@ export default function Cockpit() {
                 submit={(e) => {
                     e.preventDefault();
                     setQuery(search);
+                    setSearch("");
                 }}
+                value={search}
                 change={(e) => setSearch(e.target.value)}
+                isDisable={!search}
             />
             {loading === false ? (
                 <h1>Enter a name of city, please!</h1>
@@ -23,41 +45,8 @@ export default function Cockpit() {
             ) : result.length < 1 ? (
                 <h1>Loading....</h1>
             ) : (
-                <City data={result} />
+                cityList
             )}
         </div>
     );
-}
-function useAsyncHook(searchCity) {
-    const [result, setResult] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const API_KEY = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
-
-    useEffect(() => {
-        async function fetchCityInfo() {
-            try {
-                setLoading(true);
-                setResult([]);
-                const response = await fetch(
-                    `https://api.openweathermap.org/data/2.5/weather?q=${searchCity}&appid=${API_KEY}`
-                );
-                const json = await response.json();
-                setResult({
-                    key: json.id,
-                    name: json.name,
-                    weatherMain: json.weather[0].main,
-                    weatherDescription: json.weather[0].description,
-                    minTemp: json.main.temp_min,
-                    maxTemp: json.main.temp_max,
-                    longitude: json.coord.lon,
-                    latitude: json.coord.lat,
-                });
-            } catch (error) {
-                setLoading(null);
-            }
-        }
-        if (searchCity !== "") fetchCityInfo();
-    }, [searchCity]);
-
-    return [result, loading];
 }
