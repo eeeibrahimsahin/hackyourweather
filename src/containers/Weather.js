@@ -3,6 +3,7 @@ import Cockpit from "../components/Cockpit/Cockpit";
 import CityList from "../components/CityList/CityList";
 import useSearchHook from "../utils/useSearchHook";
 import MyModal from "../components/Modal/Modal";
+import Spinner from "../components/Spinner/Spinner";
 const Weather = () => {
     const [search, setSearch] = useState("");
     const [query, setQuery] = useState("");
@@ -50,9 +51,7 @@ const Weather = () => {
             {loading === false ? null : loading === null ? (
                 <MyModal />
             ) : result.length < 1 ? (
-                <h1 className="d-flex justify-content-center text-white">
-                    Loading....
-                </h1>
+                <Spinner />
             ) : (
                 <CityList
                     data={result}
@@ -65,3 +64,8 @@ const Weather = () => {
 };
 
 export default Weather;
+{
+    /* <h1 className="d-flex justify-content-center text-white">
+                    Loading....
+                </h1> */
+}
