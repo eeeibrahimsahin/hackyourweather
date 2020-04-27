@@ -27,8 +27,6 @@ const Weather = () => {
         setQuery(search);
         setSearch("");
         let colorIndex = Math.floor(Math.random() * bgColors.length);
-        console.log(colorIndex);
-
         setColors([bgColors[colorIndex], ...colors]);
     };
     const deleteHandler = (id) => {
@@ -64,8 +62,3 @@ const Weather = () => {
 };
 
 export default Weather;
-{
-    /* <h1 className="d-flex justify-content-center text-white">
-                    Loading....
-                </h1> */
-}

@@ -10,7 +10,10 @@ function MyModal() {
                 <Modal.Header closeButton>
                     <Modal.Title>Opppssss</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>City Not Found</Modal.Body>
+                <Modal.Body>
+                    <h5>Something went wrong...</h5>{" "}
+                    <p>Be sure that you entered a valid city name!</p>
+                </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close

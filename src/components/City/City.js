@@ -3,6 +3,7 @@ export default function Cities({
     name,
     weather: [{ main: weatherMain, description: weatherDescription }],
     main: { temp_min: minTemp, temp_max: maxTemp },
+    sys: { country },
     coord: { lon: longitude, lat: latitude },
     deleteCity,
     bgColor,
@@ -26,6 +27,7 @@ export default function Cities({
                 <p>
                     location: {longitude}, {latitude}
                 </p>
+                <p className="text-right">{country}</p>
             </div>
         </div>
     );
