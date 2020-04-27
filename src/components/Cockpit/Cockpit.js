@@ -1,52 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import Input from "../Input/Input";
-import City from "../City/City";
-import useSearchHook from "../../utils/useSearchHook";
+import Header from "../Header/Header";
 
-export default function Cockpit() {
-    const [search, setSearch] = useState("");
-    const [query, setQuery] = useState("");
-    const [result, setResult, loading, setLoading] = useSearchHook(query);
-    const deleteHandler = (id) => {
-        let newList = result.filter((city) => city.id !== id);
-        setResult(newList);
-        if (newList.length === 0) {
-            setLoading(false);
-            window.location.reload();
-        }
-    };
-
-    const cityList = result.map((city) => {
-        return (
-            <City
-                key={city.id}
-                {...city}
-                deleteCity={() => deleteHandler(city.id)}
-            />
-        );
-    });
+const Cockpit = ({ submit, change, value, isDisable }) => {
     return (
         <div>
-            <h1>Weather</h1>
+            <Header />
             <Input
-                submit={(e) => {
-                    e.preventDefault();
-                    setQuery(search);
-                    setSearch("");
-                }}
-                value={search}
-                change={(e) => setSearch(e.target.value)}
-                isDisable={!search}
+                submit={submit}
+                change={(e) => change(e.target.value)}
+                value={value}
+                isDisable={isDisable}
             />
-            {loading === false ? (
-                <h1>Enter a name of city, please!</h1>
-            ) : loading === null ? (
-                <h1>No City Found</h1>
-            ) : result.length < 1 ? (
-                <h1>Loading....</h1>
-            ) : (
-                cityList
-            )}
         </div>
     );
-}
+};
+export default Cockpit;

@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import Cockpit from "./components/Cockpit/Cockpit";
+import Weather from "./containers/Weather";
 
 function App() {
     return (
-        <div className="App">
-            <Cockpit />
+        <div>
+            <Weather />
         </div>
     );
 }

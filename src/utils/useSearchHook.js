@@ -14,7 +14,7 @@ const useSearchHook = (searchCity) => {
                     `data/2.5/weather?q=${searchCity}&appid=${process.env.REACT_APP_OPENWEATHERMAP_API_KEY}`
                 )
                 .then((response) => {
-                    setResult([...result, { ...response.data }]);
+                    setResult([{ ...response.data }, ...result]);
                 })
                 .catch((error) => setLoading(null));
         }
