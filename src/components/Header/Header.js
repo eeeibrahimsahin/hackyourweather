@@ -6,8 +6,8 @@ export default function Header() {
             <div className="container">
                 <h1 className="display-4">Weather</h1>
                 <p className="lead">
-                    You can find the weather information about city wherever you
-                    want.
+                    You can find the weather information about city whichever
+                    you want.
                 </p>
             </div>
         </div>
