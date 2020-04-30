@@ -6,9 +6,10 @@ import MyModal from "../components/Modal/Modal";
 import Spinner from "../components/Spinner/Spinner";
 const Weather = () => {
     const [search, setSearch] = useState("");
-    const [query, setQuery] = useState("");
-    const [result, setResult, loading, setLoading] = useSearchHook(query);
+    const [query, setQuery] = useState([""]);
+    const [result, setResult, loading, setLoading] = useSearchHook(query[0]);
     const [colors, setColors] = useState([]);
+    const [isAlreadySearched, setIsAlreadySearched] = useState(false);
     const bgColors = [
         "bg-primary",
         "bg-secondary",
@@ -19,12 +20,19 @@ const Weather = () => {
         "bg-light",
         "bg-dark",
     ];
+
     const changeHandler = (inputText) => {
         setSearch(inputText);
     };
     const submitHandler = (e) => {
         e.preventDefault();
-        setQuery(search);
+        setIsAlreadySearched(false);
+        if (!query.includes(search)) {
+            setQuery([search, ...query]);
+        } else {
+            setLoading(null);
+            setIsAlreadySearched((old) => !old);
+        }
         setSearch("");
         let colorIndex = Math.floor(Math.random() * bgColors.length);
         setColors([bgColors[colorIndex], ...colors]);
@@ -37,6 +45,13 @@ const Weather = () => {
             window.location.reload();
         }
     };
+    const cityList = (
+        <CityList
+            data={result}
+            deleteHandler={deleteHandler}
+            bgColors={colors}
+        />
+    );
 
     return (
         <div>
@@ -47,15 +62,14 @@ const Weather = () => {
                 isDisable={!search}
             />
             {loading === false ? null : loading === null ? (
-                <MyModal />
+                <>
+                    <MyModal isAlreadySearched={isAlreadySearched} />
+                    {cityList}
+                </>
             ) : result.length < 1 ? (
                 <Spinner />
             ) : (
-                <CityList
-                    data={result}
-                    deleteHandler={deleteHandler}
-                    bgColors={colors}
-                />
+                cityList
             )}
         </div>
     );
