@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../Button/Button";
 export default function Cities({
     name,
     weather: [{ main: weatherMain, description: weatherDescription, icon }],
@@ -7,6 +8,7 @@ export default function Cities({
     coord: { lon: longitude, lat: latitude },
     deleteCity,
     bgColor,
+    forecast,
 }) {
     let cardClass = `card text-white mx-auto mb-3 ${bgColor}`;
     if (bgColor === "bg-light")
@@ -37,11 +39,14 @@ export default function Cities({
                 <p>
                     location: {longitude}, {latitude}
                 </p>
-                <img
-                    className="float-right"
-                    src={`https://www.countryflags.io/${country}/shiny/64.png`}
-                    alt=""
-                />
+                <div className="d-flex justify-content-between align-items-center ">
+                    <Button onClick={forecast} btnName="5 days forecast" />
+
+                    <img
+                        src={`https://www.countryflags.io/${country}/shiny/64.png`}
+                        alt=""
+                    />
+                </div>
             </div>
         </div>
     );

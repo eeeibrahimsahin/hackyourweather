@@ -1,6 +1,6 @@
 import React from "react";
 import City from "../City/City";
-const CityList = ({ data, bgColors, deleteHandler }) => {
+const CityList = ({ data, bgColors, deleteHandler, forecast }) => {
     return (
         <div className="d-flex justify-content-center flex-wrap">
             {data.map((city, index) => {
@@ -12,6 +12,7 @@ const CityList = ({ data, bgColors, deleteHandler }) => {
                         key={city.id}
                         {...city}
                         deleteCity={() => deleteHandler(city.id)}
+                        forecast={() => forecast(city.name)}
                     />
                 );
             })}

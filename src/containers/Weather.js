@@ -4,10 +4,13 @@ import CityList from "../components/CityList/CityList";
 import useSearchHook from "../utils/useSearchHook";
 import MyModal from "../components/Modal/Modal";
 import Spinner from "../components/Spinner/Spinner";
-const Weather = () => {
+const Weather = ({ history }) => {
     const [search, setSearch] = useState("");
     const [query, setQuery] = useState([""]);
-    const [result, setResult, loading, setLoading] = useSearchHook(query[0]);
+    const [result, setResult, loading, setLoading] = useSearchHook(
+        query[0],
+        "weather"
+    );
     const [colors, setColors] = useState([]);
     const [isAlreadySearched, setIsAlreadySearched] = useState(false);
     const bgColors = [
@@ -45,11 +48,15 @@ const Weather = () => {
             window.location.reload();
         }
     };
+    const forecastHandler = (cityName) => {
+        history.push(`/${cityName}`);
+    };
     const cityList = (
         <CityList
             data={result}
             deleteHandler={deleteHandler}
             bgColors={colors}
+            forecast={forecastHandler}
         />
     );
 

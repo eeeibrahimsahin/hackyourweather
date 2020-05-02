@@ -16,7 +16,7 @@ export default function Input({ submit, change, value, isDisable }) {
                     type="text"
                     onChange={change}
                     value={value}
-                    placeholder="Enter a name of city"
+                    placeholder="Enter a city name"
                 />
                 <button
                     className="btn btn-outline-secondary bg-light"

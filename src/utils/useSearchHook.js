@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const useSearchHook = (searchCity) => {
+const useSearchHook = (searchCity, requestType) => {
     const [result, setResult] = useState([]);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
@@ -10,7 +10,7 @@ const useSearchHook = (searchCity) => {
             setResult([]);
             axios
                 .get(
-                    `data/2.5/weather?q=${searchCity}&units=metric&appid=${process.env.REACT_APP_OPENWEATHERMAP_API_KEY}`
+                    `data/2.5/${requestType}?q=${searchCity}&units=metric&appid=${process.env.REACT_APP_OPENWEATHERMAP_API_KEY}`
                 )
                 .then((response) => {
                     setResult([{ ...response.data }, ...result]);
@@ -21,7 +21,7 @@ const useSearchHook = (searchCity) => {
                 });
         }
         if (searchCity !== "") fetchCityInfo();
-    }, [searchCity]);
+    }, [searchCity, requestType]);
 
     return [result, setResult, loading, setLoading];
 };
